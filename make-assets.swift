@@ -1,10 +1,10 @@
 // Draws every telly icon, banner and splash, for every app, from the one wordmark in
-// brand/telly-wordmark.svg (Roboto Black, made by make-wordmark.swift).
-// Run from ~/Code: swift SimpleIPTV/brand/make-assets.swift
+// telly-wordmark.svg (Roboto Black, made by make-wordmark.swift).
+// Run from the folder that holds the telly repos (e.g. ~/Code): swift telly-brand/make-assets.swift
 import AppKit
 
 let code = FileManager.default.currentDirectoryPath
-let svg = try! String(contentsOfFile: "\(code)/SimpleIPTV/brand/telly-wordmark.svg", encoding: .utf8)
+let svg = try! String(contentsOfFile: "\(code)/telly-brand/telly-wordmark.svg", encoding: .utf8)
 func attribute(_ name: String) -> String {
     let start = svg.range(of: "\(name)=\"")!.upperBound
     return String(svg[start..<svg[start...].firstIndex(of: "\"")!])
@@ -107,9 +107,8 @@ func drawMacIcon(_ ctx: CGContext) {
     drawMark(ctx, cx: 512, cy: 512, width: 560, bar: true)
 }
 
-macIcon(1024, to: "telly-desktop/assets/icon.png")
-// The native Mac app (built from telly-ipad): every size of the asset catalog's Mac icon.
-let macSet = "telly-ipad/Telly/Assets.xcassets/AppIconMac.appiconset"
+// Every size of the Mac app's icon, in its asset catalog.
+let macSet = "telly-apple/Telly/Assets.xcassets/AppIconMac.appiconset"
 try! FileManager.default.createDirectory(atPath: "\(code)/\(macSet)", withIntermediateDirectories: true)
 var macImages: [String] = []
 for points in [16, 32, 128, 256, 512] {
@@ -130,25 +129,25 @@ try! """
 """.write(toFile: "\(code)/\(macSet)/Contents.json", atomically: true, encoding: .utf8)
 
 // ---- iPad: full bleed, iPadOS rounds the corners ----
-tile(1024, 1024, markWidth: 680, to: "telly-ipad/Telly/Assets.xcassets/AppIcon.appiconset/icon.png")
+tile(1024, 1024, markWidth: 680, to: "telly-apple/Telly/Assets.xcassets/AppIcon.appiconset/icon.png")
 
 // ---- LG TV ----
-tile(80, 80, markWidth: 58, to: "telly-desktop/webos/icon.png")
-tile(130, 130, markWidth: 94, to: "telly-desktop/webos/largeIcon.png")
-render(1920, 1080, opaque: true, to: "telly-desktop/webos/splash.png") { ctx in
+tile(80, 80, markWidth: 58, to: "telly-lg/webos/icon.png")
+tile(130, 130, markWidth: 94, to: "telly-lg/webos/largeIcon.png")
+render(1920, 1080, opaque: true, to: "telly-lg/webos/splash.png") { ctx in
     ctx.setFillColor(CGColor(srgbRed: 0x15/255, green: 0x1a/255, blue: 0x22/255, alpha: 1))
     ctx.fill(CGRect(x: 0, y: 0, width: 1920, height: 1080))
     drawMark(ctx, cx: 960, cy: 540, width: 520, bar: true)
 }
 
 // ---- Fire TV: banner tiles, the launcher icon (white on transparent; Fire OS adds its tile) and the splash ----
-tile(320, 180, markWidth: 196, to: "SimpleIPTV/app/src/main/res/drawable-xhdpi/aab_telly_banner.png")
-tile(480, 270, markWidth: 294, to: "SimpleIPTV/app/src/main/res/drawable-xxhdpi/aab_telly_banner.png")
+tile(320, 180, markWidth: 196, to: "telly-android/app/src/main/res/drawable-xhdpi/aab_telly_banner.png")
+tile(480, 270, markWidth: 294, to: "telly-android/app/src/main/res/drawable-xxhdpi/aab_telly_banner.png")
 for (dir, px) in [("mdpi", 48), ("hdpi", 72), ("xhdpi", 96), ("xxhdpi", 144), ("xxxhdpi", 192)] {
-    render(px, px, opaque: false, to: "SimpleIPTV/app/src/main/res/drawable-\(dir)/aaa_telly_icon.png") { ctx in
+    render(px, px, opaque: false, to: "telly-android/app/src/main/res/drawable-\(dir)/aaa_telly_icon.png") { ctx in
         drawMark(ctx, cx: CGFloat(px) / 2, cy: CGFloat(px) / 2, width: CGFloat(px) * 0.82, bar: false)
     }
 }
-render(560, 200, opaque: false, to: "SimpleIPTV/app/src/main/res/drawable-xhdpi/splash_wordmark.png") { ctx in
+render(560, 200, opaque: false, to: "telly-android/app/src/main/res/drawable-xhdpi/splash_wordmark.png") { ctx in
     drawMark(ctx, cx: 280, cy: 100, width: 330, bar: false)
 }

@@ -1,6 +1,6 @@
 // Draws the telly wordmark once, from Roboto Black (Apache 2.0), as SVG paths: the single source
 // for every app and icon. Letter spacing -0.02em, as the Fire TV app has always used.
-// Run: swift brand/make-wordmark.swift path/to/Roboto-Black.ttf brand/telly-wordmark.svg
+// Run: swift make-wordmark.swift path/to/Roboto-Black.ttf telly-wordmark.svg
 import CoreText
 import Foundation
 
