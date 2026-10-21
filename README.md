@@ -5,7 +5,7 @@ telly app. One source, so the logo is the same everywhere.
 
 | File | What it is |
 |---|---|
-| `telly-wordmark.svg` | The wordmark: "telly" in [Roboto](https://github.com/googlefonts/roboto-3-classic) Black, letter spacing −0.02em, as outlines |
+| `telly-wordmark.svg` | The wordmark: "telly" in [Roboto](https://github.com/googlefonts/roboto) Black (v2.138), letter spacing −0.02em, as outlines |
 | `make-wordmark.swift` | Makes `telly-wordmark.svg` from Roboto Black (`Roboto-LICENSE.txt`, Apache 2.0) |
 | `make-assets.swift` | Draws every icon, banner and splash into the app repos |
 
