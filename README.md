@@ -35,5 +35,5 @@ swift make-wordmark.swift path/to/Roboto-Black.ttf telly-wordmark.svg
 
 ## Licence
 
-The scripts and artwork are free software under the [GNU General Public License v3.0](LICENSE).
+The scripts and artwork are free for personal, non-commercial use under the [PolyForm Noncommercial License 1.0.0](LICENSE); commercial use needs permission.
 Roboto is licensed under the Apache License 2.0 (`Roboto-LICENSE.txt`).
